@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+   *{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+   
+}
+html{
+    scroll-behavior: smooth;
+}
+header{
+display: flex;
+align-items: center;
+justify-content: space-between;
+background: #FF807D;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 65px;
+z-index: 1000;
+
+}
+.logo{
+margin-left: 3%;
+}
+.logo img{
+width: 50px;
+}
+.header-nav{
+display: flex;
+justify-content: center;
+gap: 40px;
+list-style: none;
+}
+.header-nav li a{
+color: white;
+text-decoration: none;
+letter-spacing: 1px;
+font-size: 19px;
+transition: .5s;
+}
+.header-nav li a:hover{
+    color: black;
+}
+.header-right{
+    margin-right: 3%;
+    display: flex;
+    align-items: center;
+}
+.header-right #login{
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    letter-spacing: 1px;
+    transition: .5s;
+    background: white;
+    border-radius: 50px;
+    padding: 10px;
+}
+.header-right #login:hover{
+    color: white;
+    background: black;
+}
+.header-right .logout a{
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    letter-spacing: 1px;
+    transition: .5s;
+    background: white;
+    border-radius: 50px;
+    padding: 10px;
+}
+.header-right .logout a:hover{
+    color: white;
+    background: black;
+}
+#check,#check2,#label2{
+    display: none;
+}
+.header-right label{
+    transition: .5s;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+    .about{
+    width: 100%;
+    height: 100vh;
+    background:#E16C69;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+}
+.about .about-img img{
+    width: 400px;
+    height: 400px;
+}
+.about .about-text{
+    width: 400px;
+    line-height: 30px;
+    letter-spacing: 1px;
+    color: white;
+}
+.about-text h1{
+    margin-bottom: 50px;
+    font-size: 40px;
+}
+</style>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" alt="">
+        </div>
+         <input type="checkbox" name="check" id="check">
+         
+        
+        <ul class="header-nav">
+            <li><a href="homepage.html">Home</a></li>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="contactUs.html">Contact us</a></li>
+        </ul>
+        <div class="header-right">
+            <a href="login.html" id="login">Log In/Register</a>
+            
+            <label for="check">nav</label>
+        </div>
+    </header>
+
+    <div class="about" id="about">
+        <div class="about-img">
+            <img src="images/logo.png" alt="">
+        </div>
+        <div class="about-text">
+            <h1>About us</h1>
+            <p>Print My Shirt is a printing shop from the Philippines that prints customized souvenirs or items with your own design. We customize items like t-shirts, coffee mugs, keychains, and more. We provide good service and quality items to be used by our dear customers. </p>
+        </div>
+    </div>
+</body>
+</html>

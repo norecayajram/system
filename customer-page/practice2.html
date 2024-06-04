@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        font-family: sans-serif;
+        box-sizing: border-box;
+    }
+    .center{
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .slide-container{
+        position: relative;
+        height: 500px;
+        width: 950px;
+        border: 3px solid red;
+    }
+    .slide-container .slides{
+        width: 100%;
+        height: calc(100% - 65px);
+        position: relative;
+        overflow: hidden;
+    }
+    .slide-container .slides img{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .slide-container .slides img:not(.active){
+        top: 0;
+        left: -100%;
+    }
+    .slide-container .prev, .next{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+        font-size: 35px;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+    }
+    .slide-container .prev{
+        left: 0;
+    }
+    .slide-container .next{
+        right: 0;
+    }
+    .slide-container .dotscontainer{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 3;
+        bottom: 30px;
+        display: flex;
+    }
+    .slide-container .dotscontainer .dot{
+        width: 25px;
+        height: 25px;
+        margin: 0 4px;
+        border: 3px solid #bbb;
+        border-radius: 100%; 
+    }
+    .slide-container .dotscontainer .active{
+        background-color: black;
+    }
+
+    @keyframes next1 {
+        from{
+            left: 0%;
+        }
+        to{
+            left: -100%;
+        }
+    }
+    @keyframes next2 {
+        from{
+            left: 100%;
+        }
+        to{
+            left: 0%;
+        }
+    }
+
+    @keyframes prev1 {
+        from{
+            left: 0%;
+        }
+        to{
+            left: 100%;
+        }
+    }
+    @keyframes prev2 {
+        from{
+            left: -100%;
+        }
+        to{
+            left: 0%;
+        }
+    }
+</style>
+<body>
+    <div class="center">
+    <div class="slide-container">
+        <div class="slides">
+        <img src="images/logo.png" alt="" class="active"> 
+        <img src="images/fridgemagnet.jpg" alt="">
+        <img src="images/tshirt.jpg" alt="">
+        <img src="images/alcoholbottle.jpg" alt="">
+        <img src="images/floatingframe.jpg" alt="">
+    </div>
+    <div class="buttons">
+        <span class="prev">&#10094;</span>
+        <span class="next">&#10095;</span>
+    </div>
+        <div class="dotscontainer">
+            <div class="dot active" attr="0" onclick="switchimage(this)"></div>
+            <div class="dot" attr="1" onclick="switchimage(this)"></div>
+            <div class="dot" attr="2" onclick="switchimage(this)"></div>
+            <div class="dot" attr="3" onclick="switchimage(this)"></div>
+            <div class="dot" attr="4" onclick="switchimage(this)"></div>
+        </div>
+    </div>
+</div>
+
+    <script>    
+        let slideimages = document.querySelectorAll('img');
+        
+        let prev = document.querySelector('.prev');
+        let next = document.querySelector('.next');
+
+        let dots = document.querySelectorAll('.dot');
+
+        let counter = 0;
+
+        next.addEventListener('click', slideNext);
+            function slideNext(){
+                slideimages[counter].style.animation = 'next1 0.5s ease-in-out forwards';
+                if(counter >= slideimages.length-1){
+                    counter = 0;
+                }else{
+                    counter++;
+                }
+                slideimages[counter].style.animation = 'next2 0.5s ease-in-out forwards';
+                indicator()
+            }
+
+        prev.addEventListener('click', slidePrev);
+            function slidePrev(){
+                slideimages[counter].style.animation = 'prev1 0.5s ease-in-out forwards';
+                if(counter == 0){
+                    counter = slideimages.length-1;
+                }else{
+                    counter--;
+                }
+                slideimages[counter].style.animation = 'prev2 0.5s ease-in-out forwards';
+                indicator()
+            }
+        
+
+        function autoSlide(){
+            deletInterval = setInterval(timer, 1000);
+            function timer(){
+                slideNext();
+                indicator();
+            }
+        }
+        autoSlide();
+
+        const slide_container = document.querySelector(".slide-container");
+
+        slide_container.addEventListener("mouseover", function(){
+            clearInterval(deletInterval);
+        });
+
+        slide_container.addEventListener("mouseout", autoSlide);
+
+        function indicator(){
+            for(i = 0; i< dots.length; i++){
+                dots[i].className = dots[i].className.replace(' active', '');
+            }
+            dots[counter].className += ' active';
+        }
+
+        function switchimage(currentimage){
+            currentimage.classList.add('active');
+            let imageid = currentimage.getAttribute('attr');
+            if(imageid > counter){
+                slideimages[counter].style.animation = 'next1 0.5s ease-in-out forwards';
+                counter = imageid;
+                slideimages[counter].style.animation = 'next2 0.5s ease-in-out forwards';
+            }
+            else if(imageid == counter){
+                return;
+            }else{
+                slideimages[counter].style.animation = 'prev1 0.5s ease-in-out forwards';
+                counter = imageid;
+                slideimages[counter].style.animation = 'prev2 0.5s ease-in-out forwards';
+            }
+            indicator();
+        }
+    </script>
+</body>
+</html>
